@@ -9,12 +9,12 @@ module.exports = function(grunt) {
                 command: './electron/Electron.app/Contents/MacOS/Electron .././'
             }
         },
-        coffee: {
+        cjsx: {
             glob_to_multiple: {
                 expand: true,
                 cwd: '../src',
-                src: ['**/*.coffee'],
-                dest: '../js',
+                src: ['*.coffee'],
+                dest: '../js/',
                 ext: '.js'
             }
         }
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-download-electron');
     grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-coffee-react');
 
-    grunt.registerTask('build', ['download-electron', 'coffee', 'exec:build']);
+    grunt.registerTask('build', ['download-electron', 'cjsx','exec:build']);
 };
