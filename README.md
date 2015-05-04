@@ -1,6 +1,8 @@
 # electron-markdown-editor
 This project is [electron](https://github.com/atom/electron) test project.
 
+![screen shot](./screen-shot.png)
+
 ## run app
 OSX only support.
 
