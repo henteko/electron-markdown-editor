@@ -14,8 +14,19 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'src',
                 src: ['*.coffee'],
-                dest: 'js/',
+                dest: 'public/js/',
                 ext: '.js'
+            }
+        },
+        sass: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'styles',
+                    src: ['*.scss'],
+                    dest: 'public/css',
+                    ext: '.css'
+                }]
             }
         }
     });
@@ -23,7 +34,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-download-electron');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-coffee-react');
+    grunt.loadNpmTasks('grunt-contrib-sass');
 
     grunt.registerTask('setup', ['download-electron'])
-    grunt.registerTask('run', ['cjsx','exec:build']);
+    grunt.registerTask('run', ['cjsx', 'sass', 'exec:build']);
 };
