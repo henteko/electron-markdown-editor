@@ -8,11 +8,21 @@ module.exports = function(grunt) {
             build: {
                 command: './electron/Electron.app/Contents/MacOS/Electron .././'
             }
+        },
+        coffee: {
+            glob_to_multiple: {
+                expand: true,
+                cwd: '../src',
+                src: ['**/*.coffee'],
+                dest: '../js',
+                ext: '.js'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-download-electron');
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
 
-    grunt.registerTask('build', ['download-electron', 'exec:build']);
+    grunt.registerTask('build', ['download-electron', 'coffee', 'exec:build']);
 };
