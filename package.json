@@ -1,0 +1,9 @@
+{
+  "name": "electronTest",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "grout": "0.0.0",
+    "grunt": "^0.4.5"
+  }
+}
