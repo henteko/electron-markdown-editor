@@ -8,7 +8,7 @@ OSX only support.
 $ cd electronTest/
 $ npm install grunt-cli
 $ npm install
+$ bundle install
 $ grunt setup
-$ gem install sass
 $ grunt run
 ```
