@@ -1,12 +1,48 @@
 React = require('react')
+madparser = require('markdown').markdown
 
-CommentBox = React.createClass
+App = React.createClass(
+  getInitialState: ->
+    {markdown: ''}
+  ,
+  updateMarkdown: (markdown) ->
+    this.setState({markdown: markdown})
+  ,
   render: ->
-    <div className="commentBox">
-      Hello, world! I am a CommentBox.
-    </div>
+    (
+      <div>
+        <TextInput onChange={this.updateMarkdown} />
+        <Markdown markdown={this.state.markdown} />
+      </div>
+    )
+)
+
+TextInput = React.createClass(
+  propTypes: ->
+    onChange: React.PropTypes.func.isRequired
+  ,
+  _onChange: (e) ->
+    this.props.onChange(e.target.value)
+  ,
+  render: ->
+    (
+      <textarea onChange={this._onChange}>
+      </textarea>
+    )
+)
+
+Markdown = React.createClass(
+  propTypes: ->
+    markdown: React.PropTypes.string.isRequired
+  ,
+  render: ->
+    html = madparser.toHTML(this.props.markdown)
+    (
+      <div dangerouslySetInnerHTML={{__html:html}}></div>
+    )
+)
 
 React.render(
-  <CommentBox />,
-  document.getElementById('example')
+  <App />
+  document.getElementById('app-container')
 )

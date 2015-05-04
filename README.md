@@ -6,9 +6,8 @@ OSX only support.
 
 ```sh
 $ cd electronTest/
-$ npm install
-$ cd build/
 $ npm install grunt-cli
 $ npm install
-$ grunt build
+$ grunt setup
+$ grunt run
 ```
