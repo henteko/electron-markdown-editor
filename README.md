@@ -12,5 +12,6 @@ $ npm install grunt-cli
 $ npm install
 $ bundle install
 $ grunt setup
+$ grunt build
 $ grunt run
 ```
