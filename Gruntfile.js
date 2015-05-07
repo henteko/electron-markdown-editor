@@ -40,8 +40,12 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {expand: true, cwd: 'static/', src: ['**'], dest: BUILD_PATH + '/static'},
-                    {expand: true, cwd: 'node_modules/', src: ['**'], dest: BUILD_PATH + '/node_modules'},
                     {expand: true, src: ['package.json'], dest: BUILD_PATH, filter: 'isFile'}
+                ]
+            },
+            system: {
+                files: [
+                    {expand: true, cwd: 'node_modules/', src: ['**'], dest: BUILD_PATH + '/node_modules'}
                 ]
             }
         }
@@ -54,6 +58,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('setup', ['download-electron']);
-    grunt.registerTask('build', ['exec:clean', 'cjsx', 'sass', 'copy']);
-    grunt.registerTask('run', ['exec:run']);
+    grunt.registerTask('build', ['exec:clean', 'cjsx', 'sass', 'copy:main', 'copy:system']);
+    grunt.registerTask('run',   ['exec:run']);
 };
