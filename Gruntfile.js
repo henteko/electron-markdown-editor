@@ -39,7 +39,11 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    {expand: true, cwd: 'static/', src: ['**'], dest: BUILD_PATH + '/static'},
+                    {expand: true, cwd: 'static/', src: ['**'], dest: BUILD_PATH + '/static'}
+                ]
+            },
+            config: {
+                files: [
                     {expand: true, src: ['package.json'], dest: BUILD_PATH, filter: 'isFile'}
                 ]
             },
@@ -47,6 +51,29 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: 'node_modules/', src: ['**'], dest: BUILD_PATH + '/node_modules'}
                 ]
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['src/**/*.coffee'],
+                tasks: ['cjsx'],
+                options: {
+                    spawn: false
+                }
+            },
+            staticFiles: {
+                files: ['static/*.html', 'styles/*.scss'],
+                tasks: ['sass', 'copy:main'],
+                options: {
+                    spawn: false
+                }
+            },
+            configFiles: {
+                files: ['package.json'],
+                tasks: ['copy:config'],
+                options: {
+                    spawn: false
+                }
             }
         }
     });
@@ -56,8 +83,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-coffee-react');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('setup', ['download-electron']);
-    grunt.registerTask('build', ['exec:clean', 'cjsx', 'sass', 'copy:main', 'copy:system']);
+    grunt.registerTask('build', ['exec:clean', 'cjsx', 'sass', 'copy:main', 'copy:config', 'copy:system']);
     grunt.registerTask('run',   ['exec:run']);
+    grunt.registerTask('start',   ['build', 'run', 'watch']);
 };
