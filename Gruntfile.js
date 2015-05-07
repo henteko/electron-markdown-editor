@@ -87,6 +87,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('setup', ['download-electron']);
     grunt.registerTask('build', ['exec:clean', 'cjsx', 'sass', 'copy:main', 'copy:config', 'copy:system']);
+    grunt.registerTask('sync', ['cjsx', 'sass', 'copy:main']);
     grunt.registerTask('run',   ['exec:run']);
     grunt.registerTask('start',   ['build', 'run', 'watch']);
 };
